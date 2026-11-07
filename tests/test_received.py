@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import re
 from datetime import timedelta
 
 import pytest
@@ -125,7 +126,9 @@ def test_chain_continuity():
         "from other.example.net ([198.51.100.9]) by mx.example.org; Fri, 06 Nov 2026 10:00:30 +0000",
         "from client ([203.0.113.1]) by relay.example.org; Fri, 06 Nov 2026 10:00:10 +0000",
     )
-    assert any("other.example.net" in p for p in build_chain(parse_message(broken)).problems)
+    assert any(
+        re.search(r"other\.example\.net", p) for p in build_chain(parse_message(broken)).problems
+    )
     fine = msg(
         "from relay.example.org ([198.51.100.9]) by mx.example.org; Fri, 06 Nov 2026 10:00:30 +0000",
         "from client ([203.0.113.1]) by relay.example.org; Fri, 06 Nov 2026 10:00:10 +0000",

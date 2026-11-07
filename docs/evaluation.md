@@ -70,7 +70,20 @@ Median times on the machine that built this (a cloud VM, Python 3.13), one messa
 | Ed25519 verification | 2.8 ms |
 | whole analysis (parse, path, DKIM, SPF, DMARC, findings) | 0.8 ms, with DNS answers from a file; real DNS adds the lookups |
 
-## 6. What the tests do not show
+## 6. Real DNS
+
+Everything above runs offline. The CI job `real DNS` (`tools/live_check.py`) repeats the comparisons against live records, from a GitHub-hosted runner, for 25 well-known domains (a mix of large providers and Italian banks and ISPs). The figures below are from the run on 2026-11-08 (PSL snapshot 2026-11-06); real records change, so a difference is retried once before it counts.
+
+| Check | Result |
+|---|---|
+| SPF: mailhdr against pyspf, each domain's MX addresses plus three fixed addresses (one IPv4 documentation address, two public addresses, one IPv6) | 126 evaluations on 25 domains with an SPF record: **119 identical**, **0 different**, 7 inconclusive |
+| Most DNS lookups used by one evaluation | 10 (the RFC 7208 limit) |
+| DMARC: the record parsed by mailhdr against an independent regular expression | **25 of 25** agree |
+| DKIM: RSA modulus and exponent mailhdr extracts from published keys against the `cryptography` package | **2 of 2** identical |
+
+The 7 inconclusive cases all use an IPv6 client address, and in all of them pyspf itself returned `temperror` because its DNS queries failed or timed out (long reversed-IPv6 names in `exists:` macros). pyspf gave no verdict there, so they are counted separately and neither as agreement nor as difference. The job fails if more than a tenth of the evaluations end that way. That says nothing about whether mailhdr's answer in those 7 cases is right; they remain uncompared.
+
+## 7. What the tests do not show
 
 - The comparisons use zones and messages made by the same author as the code. Agreement with two independent implementations is evidence the rules were read the same way, not proof that the rules match every real mail server.
 - Real mail flow (forwarders, lists, odd Received formats) is only represented by the hand-written formats in `tests/test_received.py`. The Received parser is tolerant, and what it cannot read is left empty, never guessed.
