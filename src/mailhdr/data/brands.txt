@@ -1,0 +1,36 @@
+# Domains that phishing likes to imitate. One per line; "#" starts a comment.
+# Replace or extend with --brands FILE. Matching is about the registrable domain.
+paypal.com
+microsoft.com
+office.com
+outlook.com
+live.com
+apple.com
+icloud.com
+google.com
+gmail.com
+amazon.com
+amazon.it
+netflix.com
+facebook.com
+instagram.com
+linkedin.com
+dropbox.com
+docusign.com
+dhl.com
+ups.com
+fedex.com
+poste.it
+posteitaliane.it
+agenziaentrate.gov.it
+inps.it
+intesasanpaolo.com
+unicredit.it
+bancaintesa.it
+bnl.it
+mps.it
+revolut.com
+wise.com
+coinbase.com
+binance.com
+github.com

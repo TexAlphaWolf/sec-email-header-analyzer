@@ -1,0 +1,32 @@
+{
+  "acmebank.example": {
+    "TXT": [
+      "v=spf1 ip4:192.0.2.0/24 -all"
+    ]
+  },
+  "_dmarc.acmebank.example": {
+    "TXT": [
+      "v=DMARC1; p=reject; rua=mailto:dmarc@acmebank.example"
+    ]
+  },
+  "s1._domainkey.acmebank.example": {
+    "TXT": [
+      "v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAulAZpmVSXNsh9ZsB1gpwjS6SEVfZSBAFcBlW8WhTi3VUrVL6Dr6N/5nm2qw1TNcIG7o44Hsg4DouZP2IRhs0bidi6UgpYJ9wkVUyyptdW50AY1rQmOzRPT8fKvaCXKBQiBEjzpmAArAYUXjiBY9LWaUzfMtHg8BRUCpQ5Isq5peQbi70zUIuqNEaVnVLCrwDthz+leXiq87AiJpQGNgeIcezf4UjsZja4fBD1pUe7nEo1Q54MmIRAifOR18QgWsU6eoEHCTUPqsR4EuZ4vYOf6G4RfraCGKSb7DSofx6npG0ODRlKar85wsQeoWUNSmDD67ib6sty/mTchby25DfWwIDAQAB"
+    ]
+  },
+  "acmebamk.example": {
+    "TXT": [
+      "v=spf1 ip4:203.0.113.0/24 -all"
+    ]
+  },
+  "_dmarc.acmebamk.example": {
+    "TXT": [
+      "v=DMARC1; p=none"
+    ]
+  },
+  "s1._domainkey.acmebamk.example": {
+    "TXT": [
+      "v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAgata+JOEKN7zhxRhWX7CzEJVpWjx0hXaXgnJ01vyzOHGHXQGTkk8FVVqp8TFaUiz3KYnTsxLiSS4/yW3H0tJndtcoD0YEAv8PCtvdw1zBXCblUFwfgQXy1KEj+XZzg3Mcx/4llqdCv+rkk5t73MrUSr4xKM2S7flXbv2UeZFH/r0OdkukG/uv1YIR8mRFhIEJR++KyWdZzIpp+tYT1kqEsM65gMGn3MtC8U+PaufPXDMw/6/tDJIkVy4ErN9U9BgTN6Ygo3oTyPD0VYK+2FO5uaVN/lvVXpn5wlZN0kuHE9GzKVJhOgSXg+2p4faZwZiZyo7jwUo3k4qe+a3Ftt2JwIDAQAB"
+    ]
+  }
+}

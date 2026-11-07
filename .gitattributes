@@ -1,0 +1,4 @@
+* text=auto eol=lf
+*.png binary
+# DKIM signs exact bytes, CRLF line endings included: never let git rewrite these.
+*.eml binary

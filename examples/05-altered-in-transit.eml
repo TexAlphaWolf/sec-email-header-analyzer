@@ -1,0 +1,23 @@
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=acmebank.example;
+ i=@acmebank.example; q=dns/txt; s=s1; t=1794092152; h=from : to :
+ subject : date : message-id;
+ bh=lUE3Fj7cTwhLElu1FOITNI4KhFX7zlklNXHAJWn3moQ=;
+ b=J4ugDxKavxMw+/VFq2da2ZetUVXYqyBMBC/6VZFyfXjcaTcXy62XSriLuM7+Yl1ERgojl
+ TBQWPV/YbKXAnqEue8/9rINta5VryhVvZc26ZeWoZe+8cBoKKbjzm5bmDUzu1HRCBNtfzWz
+ UXjxgQH8XjKTZ7354HarscruycnRyHDc8V+cFF9OuT5sAkRwT98l+UuqMNEq/ScbMS2Vvtv
+ e5LuuPI3OI4ArCKz50SqokwmbjVKDCdJ5Q39Hvd590g4nm0yNsOER5JtG82NMhGuP+BvXPF
+ wh4eaJt8Nho5sGgqaNidGhxoVhvd0gTkgxQjp+GnMPG6Xu+l7XVXSXZfogPA==
+Return-Path: <statements@acmebank.example>
+Received: from mail.acmebank.example (mail.acmebank.example [192.0.2.25]) by mx.recipient.example (Postfix) with ESMTPS id 4A1B2C for <alex@recipient.example>; Fri, 06 Nov 2026 10:00:04 +0000
+Received: from app01.internal (unknown [10.0.5.14]) by mail.acmebank.example (Postfix) with ESMTP id 9F8E7D; Fri, 06 Nov 2026 10:00:01 +0000
+From: Acme Bank <statements@acmebank.example>
+To: alex@recipient.example
+Subject: Your October statement
+Date: Fri, 06 Nov 2026 10:00:00 +0000
+Message-ID: <37492958@acmebank.example>
+
+Dear customer,
+
+your statement for October is ready (see attachment) in your online banking.
+
+Acme Bank

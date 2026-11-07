@@ -1,0 +1,23 @@
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=acmebamk.example;
+ i=@acmebamk.example; q=dns/txt; s=s1; t=1794092152; h=from : to :
+ subject : date : message-id;
+ bh=NDslqiiImKdL5agpzg7YpYjSNdYK5yk62gBT/Q9Frg0=;
+ b=G93np8GHZfkuUI0U1VD3TmSXeXwCuS5W7ny8Wjg7fX8mhchBxCuEVc9GCv4tNfNEtPytB
+ MYmdwWHmPxQN8tkBbsUfDF4x3/vi4QgwKxrmwYLSyJArEBPe6Q8KA0o0zIxZEIasO4kjT2s
+ 5zm0N+pGm/5O8NqDIf32xjgoySQm07b9DEMkEJSx9AKEUF5V+fKvKieJgGqA6Bh6mLZfmMj
+ 21lcgPteg5GSVF9mRNYIT2H+Fnl8NY3iphH+LbJKiVGY9pIC5Us3gDb9C+cY1kEqVFD/R1L
+ JFkvw0Jrkhjtu/OiQzvXBlm7KdmD/PySqjTdGZuoT0tZzjpEdIwNeHSLGZiw==
+Return-Path: <support@acmebamk.example>
+Received: from mail.acmebamk.example (mail.acmebamk.example [203.0.113.7]) by mx.recipient.example (Postfix) with ESMTPS id 7A8B9C for <alex@recipient.example>; Fri, 06 Nov 2026 10:00:12 +0000
+From: Acme Bank <support@acmebamk.example>
+To: alex@recipient.example
+Subject: Your account has been limited
+Date: Fri, 06 Nov 2026 10:00:00 +0000
+Message-ID: <82387662@acmebamk.example>
+Reply-To: helpdesk@mail-collector.example.org
+
+Dear customer,
+
+we noticed unusual activity. Confirm your identity within 24 hours: http://acmebank-verify.example.net/login
+
+Acme Bank Security

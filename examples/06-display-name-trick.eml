@@ -1,0 +1,13 @@
+Return-Path: <noreply@cheap-vps.example.net>
+Received: from cheap-vps.example.net (unknown [203.0.113.50]) by mx.recipient.example (Postfix) with ESMTP id 5D6E7F for <alex@recipient.example>; Fri, 06 Nov 2026 10:00:09 +0000
+From: "statements@acmebank.example" <noreply@cheap-vps.example.net>
+To: alex@recipient.example
+Subject: Payment received
+Date: Fri, 06 Nov 2026 10:00:00 +0000
+Message-ID: <60491067@cheap-vps.example.net>
+
+Dear customer,
+
+we noticed unusual activity. Confirm your identity within 24 hours: http://acmebank-verify.example.net/login
+
+Acme Bank Security
