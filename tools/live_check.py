@@ -9,7 +9,8 @@ What it does, for a list of well-known domains:
   dkim   downloads published DKIM keys and compares the RSA modulus mailhdr extracts with the
          one the ``cryptography`` package extracts from the same bytes
 
-Real records change, so a difference is retried once before it counts. Prints JSON, then OK or FAILED.
+Real records change, so a difference is retried once before it counts. A pyspf temperror (its own DNS failing) is counted as inconclusive, at most 10% of the evaluations.
+Prints JSON, then OK or FAILED.
 """
 
 from __future__ import annotations
@@ -103,6 +104,7 @@ def pyspf_result(ip: str, sender: str) -> tuple[str, str]:
 def live_spf() -> dict:
     resolver = DnsPythonResolver(timeout=8)
     compared = agree = with_record = 0
+    inconclusive = []
     words: dict[str, int] = {}
     diffs = []
     lookups = []
@@ -126,6 +128,10 @@ def live_spf() -> dict:
             lookups.append(mine.lookups)
             if mine.result == theirs:
                 agree += 1
+            elif theirs == "temperror":
+                # pyspf could not finish its own DNS queries (timeouts, SERVFAIL on
+                # long reversed-IPv6 names); it gave no verdict to compare with.
+                inconclusive.append({"domain": domain, "ip": ip, "mine": mine.result})
             else:
                 diffs.append(
                     {
@@ -141,6 +147,7 @@ def live_spf() -> dict:
         "domains_with_spf": with_record,
         "evaluations": compared,
         "agree": agree,
+        "inconclusive_pyspf_temperror": inconclusive,
         "differences": diffs,
         "result_words": dict(sorted(words.items())),
         "max_dns_lookups_seen": max(lookups, default=0),
@@ -230,6 +237,7 @@ def main() -> int:
     ok = (
         s["domains_with_spf"] >= 15
         and s["evaluations"] >= 50
+        and len(s["inconclusive_pyspf_temperror"]) <= s["evaluations"] // 10
         and not s["differences"]
         and d["records_parsed"] >= 8
         and d["agree_with_regex"] == d["records_parsed"]
