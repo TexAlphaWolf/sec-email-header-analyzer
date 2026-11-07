@@ -75,7 +75,7 @@ jobs:
       - run: docker build -t mailhdr .
       - name: Analyse a mounted message, offline, as an ordinary user
         run: |
-          docker run --rm -v "$PWD/examples:/mail:ro" mailhdr analyze /mail/03-lookalike-domain.eml --offline --format json > out.json
+          docker run --rm -v "$PWD/examples:/mail:ro" mailhdr analyze /mail/03-lookalike-domain.eml --offline --brands /mail/brands.txt --format json > out.json
           python3 -c "import json; d=json.load(open('out.json')); assert d['offline'] and any(f['code']=='from-typosquat' for f in d['findings'])"
       - name: Standard input and the bundled zone
         run: |

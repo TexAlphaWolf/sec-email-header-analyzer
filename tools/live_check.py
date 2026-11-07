@@ -91,11 +91,13 @@ def mx_ips(domain: str) -> list[str]:
     return ips[:3]
 
 
-def pyspf_result(ip: str, sender: str) -> str:
+def pyspf_result(ip: str, sender: str) -> tuple[str, str]:
+    """(result word, pyspf's own explanation), so a difference can be understood from the log."""
     try:
-        return pyspf.check2(ip, sender, "mx." + sender.split("@")[1], timeout=10)[0]
+        word, text = pyspf.check2(ip, sender, "mx." + sender.split("@")[1], timeout=10)
+        return word, str(text)[:160]
     except Exception as exc:
-        return f"error:{type(exc).__name__}"
+        return f"error:{type(exc).__name__}", str(exc)[:160]
 
 
 def live_spf() -> dict:
@@ -115,7 +117,7 @@ def live_spf() -> dict:
             sender = f"user@{domain}"
             for attempt in (1, 2):
                 mine = check_host(resolver, ip, sender, "mx." + domain)
-                theirs = pyspf_result(ip, sender)
+                theirs, theirs_text = pyspf_result(ip, sender)
                 if mine.result == theirs or attempt == 2:
                     break
                 time.sleep(1)
@@ -132,6 +134,7 @@ def live_spf() -> dict:
                         "mine": mine.result,
                         "theirs": theirs,
                         "why": mine.reason[:120],
+                        "theirs_text": theirs_text,
                     }
                 )
     return {
